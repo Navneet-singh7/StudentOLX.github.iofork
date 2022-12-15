@@ -1,12 +1,32 @@
-import 'package:animated_segmented_tab_control/animated_segmented_tab_control.dart';
 import 'package:flutter/material.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:olx_server/constants/themeData/themeData.dart';
 import 'package:olx_server/constants/variables.dart';
+import 'package:olx_server/screens/Recommendations/R_screens/components/sampleWidget.dart';
+import 'package:provider/provider.dart';
 
-class RecommendationHomeScreen extends StatelessWidget {
+class RecommendationHomeScreen extends StatefulWidget {
   const RecommendationHomeScreen({super.key});
 
   @override
+  State<RecommendationHomeScreen> createState() =>
+      _RecommendationHomeScreenState();
+}
+
+class _RecommendationHomeScreenState extends State<RecommendationHomeScreen>
+    with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+    _tabController.animateTo(2);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // Provide the [TabController]
@@ -17,37 +37,45 @@ class RecommendationHomeScreen extends StatelessWidget {
             child: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: SegmentedTabControl(
-                    // Customization of widget
-                    radius: const Radius.circular(3),
-                    backgroundColor: Theme.of(context).unselectedWidgetColor,
-                    indicatorColor: Theme.of(context).indicatorColor,
-                    tabTextColor: Colors.black45,
-                    selectedTabTextColor: Colors.white,
-                    squeezeIntensity: 2,
-
-                    height: 45,
-                    tabPadding: const EdgeInsets.symmetric(horizontal: 8),
-                    textStyle: Theme.of(context).textTheme.bodyText1,
-                    // Options for selection
-                    // All specified values will override the [SegmentedTabControl] setting
-                    tabs: [
-                      SegmentTab(
-                        label: 'ACCOUNT',
-                        // For example, this overrides [indicatorColor] from [SegmentedTabControl]
-                        color: Colors.red.shade200,
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    child: Container(
+                      color: theme.isDarkMode == false
+                          ? Colors.white
+                          : Colors.black,
+                      child: TabBar(
+                        // indicator: BoxDecoration(
+                        //   borderRadius: BorderRadius.circular(50),
+                        //   color: Colors.greenAccent,
+                        // ),
+                        indicator: const UnderlineTabIndicator(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 170, 166, 166),
+                                width: 8.0),
+                            insets: EdgeInsets.fromLTRB(50, 0, 50, 0)),
+                        automaticIndicatorColorAdjustment: true,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        splashBorderRadius: BorderRadius.circular(50),
+                        labelColor: theme.isDarkMode == false
+                            ? Colors.black
+                            : Colors.white,
+                        // labelColor: Theme.of(context).l,
+                        controller: _tabController,
+                        unselectedLabelColor: theme.isDarkMode == false
+                            ? const Color.fromARGB(255, 85, 83, 83)
+                            : Colors.grey,
+                        tabs: const [
+                          Tab(
+                            child: Text("Categories"),
+                          ),
+                          Tab(
+                            child: Text("Recent"),
+                          ),
+                          Tab(
+                            child: Text("Trending"),
+                          ),
+                        ],
                       ),
-                      SegmentTab(
-                        label: 'HOME',
-                        backgroundColor: Colors.blue.shade100,
-                        selectedTextColor: Colors.black45,
-                        textColor: Colors.black26,
-                      ),
-                      const SegmentTab(label: 'NEW'),
-                    ],
-                  ),
-                ),
+                    )),
                 // Sample pages
                 Padding(
                   padding: const EdgeInsets.only(top: 70),
@@ -78,31 +106,32 @@ class RecommendationHomeScreen extends StatelessWidget {
   }
 }
 
-class SampleWidget extends StatelessWidget {
-  const SampleWidget({
-    Key? key,
-    required this.label,
-    required this.color,
-  }) : super(key: key);
+// SegmentedTabControl(
+//                     // Customization of widget
+//                     radius: const Radius.circular(3),
+//                     backgroundColor: Theme.of(context).unselectedWidgetColor,
+//                     indicatorColor: Theme.of(context).indicatorColor,
+//                     tabTextColor: Colors.black45,
+//                     selectedTabTextColor: Colors.white,
+//                     squeezeIntensity: 2,
 
-  final String label;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          color: color,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(10))),
-      child: IconButton(
-          onPressed: () {
-            print(variables.pageIndex);
-          },
-          icon: const Icon(
-            Icons.home,
-            size: 20,
-          )),
-    );
-  }
-}
+//                     height: 45,
+//                     tabPadding: const EdgeInsets.symmetric(horizontal: 8),
+//                     textStyle: Theme.of(context).textTheme.bodyText1,
+//                     // Options for selection
+//                     // All specified values will override the [SegmentedTabControl] setting
+//                     tabs: [
+//                       SegmentTab(
+//                         label: 'ACCOUNT',
+//                         // For example, this overrides [indicatorColor] from [SegmentedTabControl]
+//                         color: Colors.red.shade200,
+//                       ),
+//                       SegmentTab(
+//                         label: 'HOME',
+//                         backgroundColor: Colors.blue.shade100,
+//                         selectedTextColor: Colors.black45,
+//                         textColor: Colors.black26,
+//                       ),
+//                       const SegmentTab(label: 'NEW'),
+//                     ],
+//                   ),

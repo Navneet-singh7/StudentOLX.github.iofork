@@ -7,9 +7,13 @@ Contains:
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:olx_server/constants/themeData/change_theme_button_widget.dart';
+import 'package:olx_server/constants/themeData/themeData.dart';
+import 'package:olx_server/screens/HomePage/SearchBar/searchBar.dart';
 import 'package:olx_server/screens/ProfilePage/profilePage.dart';
 import 'package:olx_server/screens/Recommendations/R_screens/recommendation_home_scree.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -25,9 +29,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final Pages = [const RecommendationHomeScreen(), const ProfilePage()];
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeProvider>(context);
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        // -----------------------------------------APP BAR
         appBar: AppBar(
-          title: const Text('Home Page App Bar'),
+          backgroundColor: theme.isDarkMode == false
+              ? const Color.fromARGB(255, 255, 255, 255)
+              : const Color.fromARGB(255, 0, 0, 0),
+          title: Text(
+            'Home Page App Bar',
+            style: TextStyle(
+                color: theme.isDarkMode == false
+                    ? const Color.fromARGB(255, 0, 0, 0)
+                    : const Color.fromARGB(255, 255, 255, 255)),
+          ),
           actions: const [
             ChangeThemeButtonWidget(),
           ],
@@ -49,4 +65,54 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           },
         ));
   }
+
+  // Widget buildFloatingSearchBar() {
+  //   final isPortrait =
+  //       MediaQuery.of(context).orientation == Orientation.portrait;
+
+  //   return FloatingSearchBar(
+  //     hint: 'Search...',
+  //     scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
+  //     transitionDuration: const Duration(milliseconds: 800),
+  //     transitionCurve: Curves.easeInOut,
+  //     physics: const BouncingScrollPhysics(),
+  //     axisAlignment: isPortrait ? 0.0 : -1.0,
+  //     openAxisAlignment: 0.0,
+  //     width: isPortrait ? 600 : 500,
+  //     debounceDelay: const Duration(milliseconds: 500),
+  //     onQueryChanged: (query) {
+  //       // Call your model, bloc, controller here.
+  //     },
+  //     // Specify a custom transition to be used for
+  //     // animating between opened and closed stated.
+  //     transition: CircularFloatingSearchBarTransition(),
+  //     actions: [
+  //       FloatingSearchBarAction(
+  //         showIfOpened: false,
+  //         child: CircularButton(
+  //           icon: const Icon(Icons.place),
+  //           onPressed: () {},
+  //         ),
+  //       ),
+  //       FloatingSearchBarAction.searchToClear(
+  //         showIfClosed: false,
+  //       ),
+  //     ],
+  //     builder: (context, transition) {
+  //       return ClipRRect(
+  //         borderRadius: BorderRadius.circular(8),
+  //         child: Material(
+  //           color: Colors.white,
+  //           elevation: 4.0,
+  //           child: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: Colors.accents.map((color) {
+  //               return Container(height: 112, color: color);
+  //             }).toList(),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }

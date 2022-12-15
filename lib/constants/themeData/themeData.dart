@@ -1,4 +1,4 @@
-import 'package:animated_segmented_tab_control/animated_segmented_tab_control.dart';
+// import 'package:animated_segmented_tab_control/animated_segmented_tab_control.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
@@ -26,17 +26,20 @@ class AppTheme {
   //
 
   static lightTheme() => ThemeData(
+        primaryColor: const Color.fromARGB(255, 255, 255, 255),
         scaffoldBackgroundColor: LightThemeColors.scaffoldBackGroundColor,
         unselectedWidgetColor: LightThemeColors.unSelectedTabBarColor,
         indicatorColor: LightThemeColors.selectedTabBarColor,
-        // tabBarTheme: TabBarTheme(
-
-        // ),
+        tabBarTheme: const TabBarTheme(
+            labelColor: Colors.black, unselectedLabelColor: Colors.black),
       );
 
   static darkTheme() => ThemeData(
+        primaryColor: Colors.black,
         scaffoldBackgroundColor: DarkThemeColors.scaffoldBackGroundColor,
         unselectedWidgetColor: DarkThemeColors.unSelectedTabBarColor,
         indicatorColor: DarkThemeColors.selectedTabBarColor,
+        tabBarTheme: const TabBarTheme(
+            labelColor: Colors.white, unselectedLabelColor: Colors.black),
       );
 }
