@@ -7,12 +7,11 @@ Contains:
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:olx_server/constants/themeData/change_theme_button_widget.dart';
 import 'package:olx_server/constants/themeData/themeData.dart';
 import 'package:olx_server/screens/HomePage/SearchBar/searchBar.dart';
 import 'package:olx_server/screens/ProfilePage/profilePage.dart';
-import 'package:olx_server/screens/Recommendations/R_screens/recommendation_home_scree.dart';
+import 'package:olx_server/screens/Recommendations/R_screens/recommendation_home_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,6 +22,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   int _selectedIndex = 0;
+  String greeting() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return "Good Morning";
+    }
+    if (hour < 17) {
+      return "Good Afternoon";
+    }
+    return "Good Evening";
+  }
 
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   // --------------------------------------------ALL SCREENS
@@ -38,13 +47,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ? const Color.fromARGB(255, 255, 255, 255)
               : const Color.fromARGB(255, 0, 0, 0),
           title: Text(
-            'Home Page App Bar',
+            greeting(),
             style: TextStyle(
                 color: theme.isDarkMode == false
                     ? const Color.fromARGB(255, 0, 0, 0)
                     : const Color.fromARGB(255, 255, 255, 255)),
           ),
           actions: const [
+            SearchBarButton(),
             ChangeThemeButtonWidget(),
           ],
         ),
