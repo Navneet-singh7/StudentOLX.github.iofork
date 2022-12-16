@@ -27,6 +27,8 @@ class AppTheme {
 
   static lightTheme() => ThemeData(
         primaryColor: const Color.fromARGB(255, 255, 255, 255),
+        iconTheme: IconThemeData(color: Color.fromARGB(255, 0, 0, 0)),
+
         scaffoldBackgroundColor: LightThemeColors.scaffoldBackGroundColor,
         unselectedWidgetColor: LightThemeColors.unSelectedTabBarColor,
         indicatorColor: LightThemeColors.selectedTabBarColor,
@@ -36,6 +38,7 @@ class AppTheme {
 
   static darkTheme() => ThemeData(
         primaryColor: Colors.black,
+        iconTheme: IconThemeData(color: Colors.white),
         scaffoldBackgroundColor: DarkThemeColors.scaffoldBackGroundColor,
         unselectedWidgetColor: DarkThemeColors.unSelectedTabBarColor,
         indicatorColor: DarkThemeColors.selectedTabBarColor,

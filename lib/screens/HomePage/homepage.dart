@@ -7,9 +7,9 @@ Contains:
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:olx_server/constants/themeData/change_theme_button_widget.dart';
 import 'package:olx_server/constants/themeData/themeData.dart';
 import 'package:olx_server/screens/HomePage/SearchBar/searchBar.dart';
+import 'package:olx_server/screens/HomePage/SettingsOptions/settingsButton.dart';
 import 'package:olx_server/screens/ProfilePage/profilePage.dart';
 import 'package:olx_server/screens/Recommendations/R_screens/recommendation_home_screen.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
           actions: const [
             SearchBarButton(),
-            ChangeThemeButtonWidget(),
+            SettingsButton(),
           ],
         ),
         // ---------------------------------------BODY
@@ -63,11 +63,28 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         // ---------------------------------------BOTTOM NAVIGATION BAR
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
-          items: const <Widget>[
-            Icon(Icons.home, size: 30),
-            Icon(Icons.man, size: 30),
+          items: <Widget>[
+            Icon(
+              Icons.home,
+              size: 30,
+              color: Theme.of(context).iconTheme.color,
+            ),
+            Icon(
+              Icons.man,
+              size: 30,
+              color: Theme.of(context).iconTheme.color,
+            ),
             // Icon(Icons.shop, size: 30),
           ],
+          backgroundColor: theme.isDarkMode == false
+              ? Color.fromARGB(255, 255, 255, 255)
+              : Color.fromARGB(255, 0, 0, 0),
+          color: theme.isDarkMode == false
+              ? Color.fromARGB(255, 255, 255, 255)
+              : Color.fromARGB(255, 0, 0, 0),
+          buttonBackgroundColor: theme.isDarkMode == false
+              ? Color.fromARGB(255, 255, 255, 255)
+              : Color.fromARGB(255, 0, 0, 0),
           onTap: (index) {
             setState(() {
               _selectedIndex = index;

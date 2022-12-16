@@ -27,6 +27,7 @@ class _RecommendationHomeScreenState extends State<RecommendationHomeScreen>
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
+    final size = MediaQuery.of(context).size;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // Provide the [TabController]
@@ -50,8 +51,7 @@ class _RecommendationHomeScreenState extends State<RecommendationHomeScreen>
                         indicator: const UnderlineTabIndicator(
                             borderSide: BorderSide(
                                 color: Color.fromARGB(255, 170, 166, 166),
-                                width: 8.0),
-                            insets: EdgeInsets.fromLTRB(50, 0, 50, 0)),
+                                width: 8)),
                         automaticIndicatorColorAdjustment: true,
                         indicatorSize: TabBarIndicatorSize.tab,
                         splashBorderRadius: BorderRadius.circular(50),
@@ -65,7 +65,10 @@ class _RecommendationHomeScreenState extends State<RecommendationHomeScreen>
                             : Colors.grey,
                         tabs: const [
                           Tab(
-                            child: Text("Categories"),
+                            child: Text(
+                              "Categories",
+                              // style: TextStyle(height: 20),
+                            ),
                           ),
                           Tab(
                             child: Text("Recent"),

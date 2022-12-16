@@ -59,7 +59,7 @@ class SearchBarButton extends StatelessWidget {
         foregroundColor: theme.isDarkMode == false
             ? Color.fromARGB(255, 0, 0, 0)
             : Color.fromARGB(255, 255, 255, 255),
-        tooltip: 'Search people',
+        tooltip: 'Search',
         onPressed: () => showSearch(
           context: context,
           delegate: SearchPage(
