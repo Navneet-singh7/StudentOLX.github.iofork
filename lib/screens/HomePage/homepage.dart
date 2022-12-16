@@ -43,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         resizeToAvoidBottomInset: false,
         // -----------------------------------------APP BAR
         appBar: AppBar(
+          toolbarHeight: 70,
           backgroundColor: theme.isDarkMode == false
               ? const Color.fromARGB(255, 255, 255, 255)
               : const Color.fromARGB(255, 0, 0, 0),
@@ -63,16 +64,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         // ---------------------------------------BOTTOM NAVIGATION BAR
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
+          height: 40,
           items: <Widget>[
             Icon(
               Icons.home,
               size: 30,
-              color: Theme.of(context).iconTheme.color,
+              color: theme.isDarkMode == false
+                  ? const Color.fromARGB(255, 0, 0, 0)
+                  : const Color.fromARGB(255, 255, 255, 255),
             ),
             Icon(
               Icons.man,
               size: 30,
-              color: Theme.of(context).iconTheme.color,
+              color: theme.isDarkMode == false
+                  ? const Color.fromARGB(255, 0, 0, 0)
+                  : const Color.fromARGB(255, 255, 255, 255),
             ),
             // Icon(Icons.shop, size: 30),
           ],
