@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:olx_server/constants/colors.dart';
 import 'package:olx_server/constants/themeData/themeData.dart';
 import 'package:olx_server/models/product_card.dart';
+import 'package:olx_server/screens/Recommendations/R_screens/components/categories/categoriesPage.dart';
 import 'package:olx_server/screens/Recommendations/R_screens/components/sampleWidget.dart';
 import 'package:provider/provider.dart';
 
@@ -42,19 +44,17 @@ class _RecommendationHomeScreenState extends State<RecommendationHomeScreen>
                           ? Colors.white
                           : Colors.black,
                       child: TabBar(
-                        indicator: const UnderlineTabIndicator(
+                        indicator: UnderlineTabIndicator(
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 170, 166, 166),
-                                width: 8)),
+                                color: LightThemeColors.TabIndicatorColor,
+                                width: 3)),
                         automaticIndicatorColorAdjustment: true,
                         indicatorSize: TabBarIndicatorSize.tab,
                         splashBorderRadius: BorderRadius.circular(50),
                         labelColor: theme.isDarkMode == false
-                            ? Colors.black
-                            : Colors.white,
-                        // labelColor: Theme.of(context).l,
+                            ? LightThemeColors.TabIndicatorColor
+                            : LightThemeColors.TabIndicatorColor,
                         controller: _tabController,
-
                         unselectedLabelColor: theme.isDarkMode == false
                             ? const Color.fromARGB(255, 85, 83, 83)
                             : Colors.grey,
@@ -84,10 +84,7 @@ class _RecommendationHomeScreenState extends State<RecommendationHomeScreen>
                     physics: const BouncingScrollPhysics(),
                     controller: _tabController,
                     children: [
-                      SampleWidget(
-                        label: 'FIRST PAGE',
-                        color: Colors.red.shade200,
-                      ),
+                      const CategoriesPage(),
                       const FoodItemCard(
                           imageUrl:
                               "https://images.unsplash.com/photo-1670272590027-72888b060829?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8NnNNVmpUTFNrZVF8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
